@@ -6,15 +6,15 @@
 #    By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 14:02:27 by isbraz-d          #+#    #+#              #
-#    Updated: 2023/11/08 14:04:30 by isbraz-d         ###   ########.fr        #
+#    Updated: 2023/11/14 14:34:08 by isbraz-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	philo
 
-CFLAGS	=	#-Wall -Wextra -Werror 
+CFLAGS	=  -pthread #-Wall -Wextra -Werror
 
-SRCS	= 	main.c
+SRCS	= 	main.c utils.c init.c actions.c
 
 OBJS	=	$(SRCS:%.c=%.o)
 
