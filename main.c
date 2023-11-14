@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:15:43 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/14 15:18:49 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/11/14 18:20:55 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ static void	*ft_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	data = philo->data;
-	pthread_mutex_lock(&data->write_lock);
-	printf("Thread executando: %d\n", philo->id);
-	pthread_mutex_unlock(&data->write_lock);
+	while (1)
+	{
+		ft_eat(philo);
+		ft_sleep(philo);
+		ft_think(philo);
+	}
 }
 
 int main(int ac, char **argv)
@@ -29,16 +32,19 @@ int main(int ac, char **argv)
 	t_data	data;
 	int	i;
 
-	i = 0;
 	ft_init_argvs(ac, argv, &data);
 	pthread_mutex_init(&data.write_lock, NULL);
+	pthread_mutex_init(&data.meal_lock, NULL);
 	data.philo = malloc(sizeof(t_philo) * data.number_of_philo);
+	i = 0;
+	init_forks(&data);
 	while (i < data.number_of_philo)
 	{
 		init_philo(&data.philo[i], &data, i);
 		pthread_create(&data.philo[i].ph, NULL, ft_routine, &data.philo[i]);
 		i++;
 	}
+	return (0);
 	i = 0;
 	while (i < data.number_of_philo)
 	{
@@ -46,6 +52,7 @@ int main(int ac, char **argv)
 		i++;
 	}
 	pthread_mutex_destroy(&data.write_lock);
+	return (0);
 }
 
 //se um philo esta comendo o philo+1 nao pode comer e se o philo atual for o ultimo, o primeiro nao pode comer

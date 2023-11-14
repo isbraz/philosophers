@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:40 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/14 16:27:51 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/11/14 17:37:25 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 void	init_philo(t_philo *philo, t_data *data, int id)
 {
-	philo->id = id;
+	philo->id = id + 1;
 	philo->last_meal = 0;
-	philo->left_fork = id;
 	philo->data = data;
-	
+	philo->own_fork = &data->forks[id];
 	if (id == data->number_of_philo - 1)
-		philo->right_fork = 0;
+		philo->next_fork = &data->forks[0];
 	else
-		philo->right_fork = id + 1;
+		philo->next_fork = &data->forks[id + 1];
 }
 
 	// int				id;
