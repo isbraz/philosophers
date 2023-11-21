@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:22:03 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/14 18:07:14 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:52:21 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ long int	ft_get_time()
 void	print_action(t_data *data, int id, char *action)
 {
 	pthread_mutex_lock(&data->write_lock);
-	printf("%ld %d %s\n", ft_get_time(), id, action);
+	printf("%ld %d %s\n", ft_get_time() - data->init_time, id, action);
 	pthread_mutex_unlock(&data->write_lock);
 }
 
 int	ft_usleep(size_t time)
 {
 	size_t	start;
-	
+
 	start = ft_get_time();
 	while ((ft_get_time() - start) < time)
 		usleep(200);

@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:50:25 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/14 18:19:43 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/11/21 16:45:47 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_philo
 	pthread_t		ph;
 	pthread_mutex_t			*own_fork;
 	pthread_mutex_t			*next_fork;
+	int				dead;
 	struct s_data	*data;
 }			t_philo;
 
@@ -43,6 +44,7 @@ typedef	struct s_data
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	meal_lock;
+	long	init_time;
 	
 }	t_data;
 

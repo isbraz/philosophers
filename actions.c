@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:09:21 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/14 18:05:04 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/11/21 16:58:21 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ void	ft_eat(t_philo *philo)
 		print_action(philo->data, philo->id, "has taken a fork");
 	}
 	philo->last_meal = ft_get_time();
-	pthread_mutex_lock(&philo->data->write_lock);
 	print_action(philo->data, philo->id, "is eating");
-	pthread_mutex_unlock(&philo->data->write_lock);
 	ft_usleep(philo->data->time_to_eat);
 	pthread_mutex_unlock(philo->next_fork);
 	pthread_mutex_unlock(philo->own_fork);
@@ -47,3 +45,11 @@ void	ft_think(t_philo *philo)
 {
 	print_action(philo->data, philo->id, "is thinking");
 }
+
+void	ft_dead(t_philo *philo)
+{
+	
+}
+
+//to make the dead function we need :
+// 1 check the time (see if have time to eat)

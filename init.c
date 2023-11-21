@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:40 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/14 17:37:25 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/11/21 15:14:55 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	init_philo(t_philo *philo, t_data *data, int id)
 	// int				id;
 	// size_t			last_meal;
 	// pthread_t		ph;
-	// int				left_fork;
+	// int				left_fork;	
 	// int				right_fork;
 	// pthread_mutex_t	meal_lock;
 

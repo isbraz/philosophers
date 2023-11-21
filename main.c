@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:15:43 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/14 18:20:55 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/11/21 15:20:09 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ int main(int ac, char **argv)
 	data.philo = malloc(sizeof(t_philo) * data.number_of_philo);
 	i = 0;
 	init_forks(&data);
+	data.init_time = ft_get_time();
 	while (i < data.number_of_philo)
 	{
 		init_philo(&data.philo[i], &data, i);
 		pthread_create(&data.philo[i].ph, NULL, ft_routine, &data.philo[i]);
 		i++;
 	}
-	return (0);
 	i = 0;
 	while (i < data.number_of_philo)
 	{
