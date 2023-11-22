@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:50:25 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/21 16:45:47 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:01:19 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ struct s_data;
 typedef struct s_philo
 {
 	int				id;
-	size_t			last_meal;
+	int			last_meal;
 	pthread_t		ph;
 	pthread_mutex_t			*own_fork;
 	pthread_mutex_t			*next_fork;
@@ -58,5 +58,7 @@ void	ft_eat(t_philo *philo);
 void	ft_sleep(t_philo *philo);
 void	ft_think(t_philo *philo);
 void	init_forks(t_data *data);
+int	ft_time_without_eat(t_philo *philo);
+int	ft_dead(t_philo *philo);
 
 # endif

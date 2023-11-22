@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:22:03 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/21 11:52:21 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:05:53 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,12 @@ int	ft_usleep(size_t time)
 	while ((ft_get_time() - start) < time)
 		usleep(200);
 	return (0);
+}
+
+int	ft_time_without_eat(t_philo *philo)
+{
+	long int	time_now;
+
+	time_now = ft_get_time() - philo->data->init_time;
+	return (time_now - philo->last_meal);
 }

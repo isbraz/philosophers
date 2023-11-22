@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:15:43 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/21 15:20:09 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/11/22 17:52:28 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	*ft_routine(void *arg)
 		ft_eat(philo);
 		ft_sleep(philo);
 		ft_think(philo);
+		
 	}
 }
 

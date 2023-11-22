@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:09:21 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/21 16:58:21 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:02:33 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,18 @@ void	ft_think(t_philo *philo)
 	print_action(philo->data, philo->id, "is thinking");
 }
 
-void	ft_dead(t_philo *philo)
+int	ft_dead(t_philo *philo)
 {
-	
+	if (ft_time_without_eat(philo) >= philo->data->time_to_die)
+	{
+		print_action(philo->data, philo->id, "died");
+		return (0);
+	}
+	return (1);
 }
 
 //to make the dead function we need :
 // 1 check the time (see if have time to eat)
+//se o tempo de espera ate voltar a comer for igual ou maior :
+// o philo morre.
+// how to get o tempo que fico sem comer
