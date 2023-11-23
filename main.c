@@ -6,26 +6,26 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:15:43 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/22 17:52:28 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:34:21 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static void	*ft_routine(void *arg)
+void	*ft_routine(void *arg)
 {
 	t_philo	*philo;
 	t_data	*data;
 
 	philo = (t_philo *)arg;
 	data = philo->data;
-	while (1)
+	while (ft_dead(philo))
 	{
 		ft_eat(philo);
 		ft_sleep(philo);
 		ft_think(philo);
-		
 	}
+	return (arg);
 }
 
 int main(int ac, char **argv)
@@ -39,11 +39,10 @@ int main(int ac, char **argv)
 	data.philo = malloc(sizeof(t_philo) * data.number_of_philo);
 	i = 0;
 	init_forks(&data);
-	data.init_time = ft_get_time();
 	while (i < data.number_of_philo)
 	{
 		init_philo(&data.philo[i], &data, i);
-		pthread_create(&data.philo[i].ph, NULL, ft_routine, &data.philo[i]);
+		pthread_create(&data.philo[i].ph, NULL, (void *)ft_routine, &data.philo[i]);
 		i++;
 	}
 	i = 0;

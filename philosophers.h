@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:50:25 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/22 18:01:19 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/11/23 14:52:06 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ long int	ft_atoi(const char *str);
 int		ft_init_argvs(int ac,char **argv, t_data *data);
 void	init_philo(t_philo *philo, t_data *data, int id);
 void	print_action(t_data *data, int id, char *action);
-long int	ft_get_time();
-int	ft_usleep(size_t time);
+size_t	ft_get_time(t_data *data);
+int	ft_usleep(size_t time, t_philo *philo);
 void	ft_eat(t_philo *philo);
 void	ft_sleep(t_philo *philo);
 void	ft_think(t_philo *philo);

@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:22:03 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/22 18:05:53 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/11/23 14:52:44 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,34 +38,34 @@ long int	ft_atoi(const char *str)
 	return (result * negative);
 }
 
-long int	ft_get_time()
+size_t	ft_get_time(t_data *data)
 {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return ((long long)(tv.tv_sec) * 1000 + (long long)(tv.tv_usec) / 1000);
+	size_t		now;
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	now = (time.tv_sec * 1000 + time.tv_usec / 1000);
+	return (now - (data->init_time));
 }
 
 void	print_action(t_data *data, int id, char *action)
 {
 	pthread_mutex_lock(&data->write_lock);
-	printf("%ld %d %s\n", ft_get_time() - data->init_time, id, action);
+	printf("%ld %d %s\n", ft_get_time(data), id, action);
 	pthread_mutex_unlock(&data->write_lock);
 }
 
-int	ft_usleep(size_t time)
+int	ft_usleep(size_t time, t_philo *philo)
 {
 	size_t	start;
 
-	start = ft_get_time();
-	while ((ft_get_time() - start) < time)
+	start = ft_get_time(philo->data);
+	while ((ft_get_time(philo->data) - start) < time)
 		usleep(200);
 	return (0);
 }
 
 int	ft_time_without_eat(t_philo *philo)
 {
-	long int	time_now;
-
-	time_now = ft_get_time() - philo->data->init_time;
-	return (time_now - philo->last_meal);
+	return (ft_get_time(philo->data) - philo->last_meal);
 }

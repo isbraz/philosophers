@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:09:21 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/22 18:02:33 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:18:09 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	ft_eat(t_philo *philo)
 		pthread_mutex_lock(philo->own_fork);
 		print_action(philo->data, philo->id, "has taken a fork");
 	}
-	philo->last_meal = ft_get_time();
+	philo->last_meal = ft_get_time(philo->data);
 	print_action(philo->data, philo->id, "is eating");
-	ft_usleep(philo->data->time_to_eat);
+	ft_usleep(philo->data->time_to_eat, philo);
 	pthread_mutex_unlock(philo->next_fork);
 	pthread_mutex_unlock(philo->own_fork);
 }
@@ -38,7 +38,7 @@ void	ft_eat(t_philo *philo)
 void	ft_sleep(t_philo *philo)
 {
 	print_action(philo->data, philo->id, "is sleeping");
-	ft_usleep(philo->data->time_to_sleep);
+	ft_usleep(philo->data->time_to_sleep, philo);
 }
 
 void	ft_think(t_philo *philo)
@@ -48,12 +48,15 @@ void	ft_think(t_philo *philo)
 
 int	ft_dead(t_philo *philo)
 {
+	
 	if (ft_time_without_eat(philo) >= philo->data->time_to_die)
 	{
 		print_action(philo->data, philo->id, "died");
+		//mudar a flag geral para 1;
 		return (0);
 	}
-	return (1);
+	else
+		return (1);
 }
 
 //to make the dead function we need :

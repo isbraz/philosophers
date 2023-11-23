@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:40 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/22 16:21:42 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/11/23 14:56:21 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	ft_init_argvs(int ac,char **argv, t_data *data)
 	data->time_to_sleep = ft_atoi(argv[4]);
 	if (ac == 6)
 		data->n_philo_eat = ft_atoi(argv[5]);
+	data->init_time = 0;
+	data->init_time = ft_get_time(data);
 	return (1);
 }
 
