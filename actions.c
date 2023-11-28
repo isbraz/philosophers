@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:09:21 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/23 15:18:09 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/11/28 19:29:59 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_eat(t_philo *philo)
 {
+	if (philo->data->dead == 1)
+		return ;
 	if (philo->id % 2)
 	{
 		pthread_mutex_lock(philo->next_fork);
@@ -37,26 +39,35 @@ void	ft_eat(t_philo *philo)
 
 void	ft_sleep(t_philo *philo)
 {
+	if (philo->data->dead == 1)
+		return ;
 	print_action(philo->data, philo->id, "is sleeping");
 	ft_usleep(philo->data->time_to_sleep, philo);
 }
 
 void	ft_think(t_philo *philo)
 {
+	if (philo->data->dead == 1)
+		return ;
 	print_action(philo->data, philo->id, "is thinking");
 }
 
 int	ft_dead(t_philo *philo)
 {
-	
+	if (philo->data->dead == 1)
+	{
+		return (0);
+	}
 	if (ft_time_without_eat(philo) >= philo->data->time_to_die)
 	{
 		print_action(philo->data, philo->id, "died");
-		//mudar a flag geral para 1;
+		philo->data->dead = 1;
 		return (0);
 	}
 	else
+	{
 		return (1);
+	}
 }
 
 //to make the dead function we need :

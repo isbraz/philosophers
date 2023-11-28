@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:15:43 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/23 15:34:21 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/11/28 18:28:46 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	*ft_routine(void *arg)
 	data = philo->data;
 	while (ft_dead(philo))
 	{
+		if (data->dead)
+			break;
 		ft_eat(philo);
 		ft_sleep(philo);
 		ft_think(philo);
@@ -30,13 +32,15 @@ void	*ft_routine(void *arg)
 
 int main(int ac, char **argv)
 {
-	t_data	data;
+	t_data			data;
 	int	i;
 
 	ft_init_argvs(ac, argv, &data);
 	pthread_mutex_init(&data.write_lock, NULL);
-	pthread_mutex_init(&data.meal_lock, NULL);
+	pthread_mutex_init(&data.mutex, NULL);
 	data.philo = malloc(sizeof(t_philo) * data.number_of_philo);
+	if (!data.philo)
+		return (0);
 	i = 0;
 	init_forks(&data);
 	while (i < data.number_of_philo)

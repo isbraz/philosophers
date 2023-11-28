@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:40 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/23 14:56:21 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/11/28 18:49:40 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	init_forks(t_data *data)
 
 	i = 0;
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->number_of_philo);
+	if (!data->forks)
+		return ;
 	while (i < data->number_of_philo)
 		pthread_mutex_init(&data->forks[i++], NULL);
 }
