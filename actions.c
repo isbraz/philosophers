@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:09:21 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/12/04 17:03:29 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/12/04 17:17:39 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ int	ft_dead(t_philo *philo)
 	if ((size_t)ft_time_without_eat(philo) >= philo->data->time_to_die)
 	{
 		print_action(philo->data, philo->id, "died");
+		pthread_mutex_lock(&philo->data->mutex);
 		philo->data->dead = 1;
+		pthread_mutex_unlock(&philo->data->mutex);
 		return (0);
 	}
 	else
