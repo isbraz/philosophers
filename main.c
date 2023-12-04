@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:15:43 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/12/04 19:29:05 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/12/04 19:35:24 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,10 @@
 void	*ft_routine(void *arg)
 {
 	t_philo	*philo;
-	// t_data	*data;
 
 	philo = (t_philo *)arg;
-	// data = philo->data;
 	while (ft_dead(philo))
 	{
-		// if (data->dead)
-		// 	break;
 		ft_eat(philo);
 		ft_sleep(philo);
 		ft_think(philo);
