@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:50:25 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/28 18:29:58 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/12/04 15:28:40 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,8 @@ int			ft_dead(t_philo *philo);
 //manage
 int			philo_is_dead(t_data *data);
 void			ft_unlock_forks(t_philo *philo);
+
+//quit
+void	destroy_mutex(t_data *data);
 
 # endif

@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:09:21 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/28 19:29:59 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/12/04 15:20:40 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,14 @@ int	ft_dead(t_philo *philo)
 	{
 		return (0);
 	}
-	if (ft_time_without_eat(philo) >= philo->data->time_to_die)
+	if ((size_t)ft_time_without_eat(philo) >= philo->data->time_to_die)
 	{
 		print_action(philo->data, philo->id, "died");
 		philo->data->dead = 1;
 		return (0);
 	}
 	else
-	{
 		return (1);
-	}
 }
 
 //to make the dead function we need :

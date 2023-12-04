@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:15:43 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/28 18:28:46 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/12/04 15:29:14 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int main(int ac, char **argv)
 		pthread_join(data.philo[i].ph, NULL);
 		i++;
 	}
-	pthread_mutex_destroy(&data.write_lock);
+	destroy_mutex(&data);
 	return (0);
 }
 

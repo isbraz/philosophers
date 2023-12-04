@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:40 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/11/28 18:49:40 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/12/04 14:50:39 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	ft_init_argvs(int ac,char **argv, t_data *data)
 	if (ft_atoi(argv[1]) < 0 || ft_atoi(argv[2]) < 0 || ft_atoi(argv[3]) < 0 \
 	|| ft_atoi(argv[4]) < 0)
 		return (0);
+	data->dead = 0;
 	data->number_of_philo = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
