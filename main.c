@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:15:43 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/12/04 15:29:14 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/12/04 19:29:05 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,47 @@
 void	*ft_routine(void *arg)
 {
 	t_philo	*philo;
-	t_data	*data;
+	// t_data	*data;
 
 	philo = (t_philo *)arg;
-	data = philo->data;
+	// data = philo->data;
 	while (ft_dead(philo))
 	{
-		if (data->dead)
-			break;
+		// if (data->dead)
+		// 	break;
 		ft_eat(philo);
 		ft_sleep(philo);
 		ft_think(philo);
 	}
 	return (arg);
+}
+
+int	is_philo_dead(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->mutex);
+	if ((size_t)ft_time_without_eat(philo) >= philo->data->time_to_die)
+	{
+		print_action(philo->data, philo->id, "died");	
+		philo->data->dead = 1;
+		pthread_mutex_unlock(&philo->data->mutex);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->data->mutex);
+	return (0);
+}
+
+int	is_anyone_dead(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->number_of_philo)
+	{
+		if (is_philo_dead(&data->philo[i]))
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 int main(int ac, char **argv)
@@ -50,12 +78,16 @@ int main(int ac, char **argv)
 		i++;
 	}
 	i = 0;
+	while (!is_anyone_dead(&data))
+		usleep(500);
 	while (i < data.number_of_philo)
 	{
 		pthread_join(data.philo[i].ph, NULL);
 		i++;
 	}
 	destroy_mutex(&data);
+	free(data.forks);
+	free(data.philo);
 	return (0);
 }
 

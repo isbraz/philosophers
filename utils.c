@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:22:03 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/12/04 16:57:13 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/12/04 19:29:00 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	print_action(t_data *data, int id, char *action)
 	pthread_mutex_lock(&data->write_lock);
 	if (!data->dead)
 		printf("%ld %d %s\n", ft_get_time(data), id, action);
-	if (action[0] == 'd')
-		data->dead = 1;
 	pthread_mutex_unlock(&data->write_lock);
 }
 

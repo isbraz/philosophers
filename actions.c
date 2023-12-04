@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:09:21 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/12/04 17:17:39 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/12/04 18:48:04 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	ft_eat(t_philo *philo)
 {
-	if (philo->data->dead == 1)
-		return ;
 	if (philo->id % 2)
 	{
 		pthread_mutex_lock(philo->next_fork);
@@ -39,35 +37,39 @@ void	ft_eat(t_philo *philo)
 
 void	ft_sleep(t_philo *philo)
 {
-	if (philo->data->dead == 1)
-		return ;
 	print_action(philo->data, philo->id, "is sleeping");
 	ft_usleep(philo->data->time_to_sleep, philo);
 }
 
 void	ft_think(t_philo *philo)
 {
-	if (philo->data->dead == 1)
-		return ;
 	print_action(philo->data, philo->id, "is thinking");
 }
 
 int	ft_dead(t_philo *philo)
 {
-	if (philo->data->dead == 1)
+	// if ((size_t)ft_time_without_eat(philo) >= philo->data->time_to_die)
+	// {
+	// 	// print_action(philo->data, philo->id, "died");
+	// 	pthread_mutex_lock(&philo->data->mutex);
+	// 	if (philo->data->dead)
+	// 	{
+	// 		pthread_mutex_unlock(&philo->data->mutex);
+	// 		return (0);	
+	// 	}
+	// 	pthread_mutex_unlock(&philo->data->mutex);
+	// 	return (0);
+	// }
+	// else
+	// 	return (1);
+	pthread_mutex_lock(&philo->data->mutex);
+	if (philo->data->dead)
 	{
-		return (0);
-	}
-	if ((size_t)ft_time_without_eat(philo) >= philo->data->time_to_die)
-	{
-		print_action(philo->data, philo->id, "died");
-		pthread_mutex_lock(&philo->data->mutex);
-		philo->data->dead = 1;
 		pthread_mutex_unlock(&philo->data->mutex);
 		return (0);
 	}
-	else
-		return (1);
+	pthread_mutex_unlock(&philo->data->mutex);
+	return (1);
 }
 
 //to make the dead function we need :
