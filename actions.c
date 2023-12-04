@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:09:21 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/12/04 15:20:40 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/12/04 17:03:29 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	ft_eat(t_philo *philo)
 	}
 	else
 	{
-		pthread_mutex_lock(philo->next_fork);
-		print_action(philo->data, philo->id, "has taken a fork");
 		pthread_mutex_lock(philo->own_fork);
+		print_action(philo->data, philo->id, "has taken a fork");
+		pthread_mutex_lock(philo->next_fork);
 		print_action(philo->data, philo->id, "has taken a fork");
 	}
 	philo->last_meal = ft_get_time(philo->data);
