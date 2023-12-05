@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:09:21 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/12/04 18:48:04 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:56:11 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,13 @@ int	ft_dead(t_philo *philo)
 	// }
 	// else
 	// 	return (1);
-	pthread_mutex_lock(&philo->data->mutex);
+	pthread_mutex_lock(&philo->data->dead_lock);
 	if (philo->data->dead)
 	{
-		pthread_mutex_unlock(&philo->data->mutex);
+		pthread_mutex_unlock(&philo->data->dead_lock);
 		return (0);
 	}
-	pthread_mutex_unlock(&philo->data->mutex);
+	pthread_mutex_unlock(&philo->data->dead_lock);
 	return (1);
 }
 
-//to make the dead function we need :
-// 1 check the time (see if have time to eat)
-//se o tempo de espera ate voltar a comer for igual ou maior :
-// o philo morre.
-// how to get o tempo que fico sem comer

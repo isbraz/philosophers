@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:15:43 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/12/04 19:35:24 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:56:59 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ int main(int ac, char **argv)
 	int	i;
 
 	ft_init_argvs(ac, argv, &data);
-	pthread_mutex_init(&data.write_lock, NULL);
-	pthread_mutex_init(&data.mutex, NULL);
+	
 	data.philo = malloc(sizeof(t_philo) * data.number_of_philo);
 	if (!data.philo)
 		return (0);

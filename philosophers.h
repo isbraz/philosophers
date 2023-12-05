@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:50:25 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/12/04 15:28:40 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:57:34 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef	struct s_data
 	t_philo			*philo;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	write_lock;
+	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	mutex;
 	int					dead;
 	long	init_time;
@@ -64,6 +65,7 @@ int			ft_usleep(size_t time, t_philo *philo);
 void		print_action(t_data *data, int id, char *action);
 size_t		ft_get_time(t_data *data);
 int			ft_time_without_eat(t_philo *philo);
+void		init_mutexes(t_data *data);
 
 //actions
 void		ft_eat(t_philo *philo);

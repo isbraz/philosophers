@@ -6,11 +6,13 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 14:23:58 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/12/04 18:17:20 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:44:04 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+
 
 int	philo_is_dead(t_data *data)
 {

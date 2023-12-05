@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:40 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/12/04 14:50:39 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:54:28 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,13 @@ int	ft_init_argvs(int ac,char **argv, t_data *data)
 	data->init_time = 0;
 	data->init_time = ft_get_time(data);
 	return (1);
+}
+
+void	init_mutexes(t_data *data)
+{
+	pthread_mutex_init(&data->write_lock, NULL);
+	pthread_mutex_init(&data->mutex, NULL);
+	pthread_mutex_init(&data->dead_lock, NULL);
 }
 
 
