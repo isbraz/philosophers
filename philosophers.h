@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:50:25 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/12/05 15:57:34 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/12/15 17:32:05 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef	struct s_data
 	size_t			time_to_die;
 	size_t			time_to_eat;
 	size_t			time_to_sleep;
-	size_t				n_philo_eat;
+	size_t				times_ate;
 	t_philo			*philo;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	write_lock;
@@ -74,10 +74,11 @@ void		ft_think(t_philo *philo);
 int			ft_dead(t_philo *philo);
 
 //manage
-int			philo_is_dead(t_data *data);
-void			ft_unlock_forks(t_philo *philo);
+int			is_philo_dead(t_philo *philo);
+int			is_anyone_dead(t_data *data);
 
 //quit
-void	destroy_mutex(t_data *data);
+void		destroy_mutex(t_data *data);
+void		ft_unlock_forks(t_philo *philo);
 
 # endif
