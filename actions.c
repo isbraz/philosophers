@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:09:21 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/12/05 15:56:11 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/12/17 20:40:13 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ void	ft_eat(t_philo *philo)
 		print_action(philo->data, philo->id, "has taken a fork");
 	}
 	philo->last_meal = ft_get_time(philo->data);
+	pthread_mutex_lock(&philo->meal_lock);
+	philo->meals++;
+	pthread_mutex_unlock(&philo->meal_lock);
 	print_action(philo->data, philo->id, "is eating");
 	ft_usleep(philo->data->time_to_eat, philo);
 	pthread_mutex_unlock(philo->next_fork);
@@ -48,21 +51,12 @@ void	ft_think(t_philo *philo)
 
 int	ft_dead(t_philo *philo)
 {
-	// if ((size_t)ft_time_without_eat(philo) >= philo->data->time_to_die)
-	// {
-	// 	// print_action(philo->data, philo->id, "died");
-	// 	pthread_mutex_lock(&philo->data->mutex);
-	// 	if (philo->data->dead)
-	// 	{
-	// 		pthread_mutex_unlock(&philo->data->mutex);
-	// 		return (0);	
-	// 	}
-	// 	pthread_mutex_unlock(&philo->data->mutex);
-	// 	return (0);
-	// }
-	// else
-	// 	return (1);
 	pthread_mutex_lock(&philo->data->dead_lock);
+	if (philo->data->full)
+	{
+		pthread_mutex_unlock(&philo->data->dead_lock);
+		return (0);
+	}
 	if (philo->data->dead)
 	{
 		pthread_mutex_unlock(&philo->data->dead_lock);
@@ -71,4 +65,3 @@ int	ft_dead(t_philo *philo)
 	pthread_mutex_unlock(&philo->data->dead_lock);
 	return (1);
 }
-

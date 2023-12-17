@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:22:03 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/12/12 17:11:19 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2023/12/17 16:07:41 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ size_t	ft_get_time(t_data *data)
 void	print_action(t_data *data, int id, char *action)
 {
 	pthread_mutex_lock(&data->write_lock);
-	if (action[3] == 'e')
-		data->times_ate++;
 	if (!data->dead)
 		printf("%ld %d %s\n", ft_get_time(data), id, action);
 	pthread_mutex_unlock(&data->write_lock);
