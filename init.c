@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:40 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/12/17 21:00:15 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2024/02/05 15:20:03 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_philo(t_philo *philo, t_data *data, int id)
 {
 	philo->id = id + 1;
-	philo->last_meal = 0;
+	philo->last_meal = ft_get_time(data);
 	philo->data = data;
 	philo->meals = 0;
 	philo->own_fork = &data->forks[id];
@@ -38,7 +38,7 @@ void	init_forks(t_data *data)
 		pthread_mutex_init(&data->forks[i++], NULL);
 }
 
-int	ft_init_argvs(int ac,char **argv, t_data *data)
+int	ft_init_argvs(int ac, char **argv, t_data *data)
 {
 	if (ac < 5 || ac > 6)
 		return (0);

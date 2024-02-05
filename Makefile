@@ -6,15 +6,15 @@
 #    By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 14:02:27 by isbraz-d          #+#    #+#              #
-#    Updated: 2023/12/17 16:06:20 by isbraz-d         ###   ########.fr        #
+#    Updated: 2024/02/05 13:58:51 by isbraz-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	philo
 
-CFLAGS	=  -pthread -g -Wall -Wextra -Werror #-fsanitize=thread
+CFLAGS	=  -pthread -g -Wall -Wextra -Werror -fsanitize=thread
 
-SRCS	= 	main.c utils.c init.c actions.c manage.c quit.c
+SRCS	= 	main.c utils.c utils_philo.c init.c actions.c manage.c quit.c 
 
 OBJS	=	$(SRCS:%.c=%.o)
 

@@ -6,11 +6,11 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:50:25 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/12/17 21:06:37 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2024/02/05 15:29:24 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef PHILOSOPHERS_H
+#ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
 # include <stdio.h>
@@ -20,7 +20,7 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-struct s_data;
+struct	s_data;
 
 typedef struct s_philo
 {
@@ -35,7 +35,7 @@ typedef struct s_philo
 	struct s_data	*data;
 }			t_philo;
 
-typedef	struct s_data
+typedef struct s_data
 {
 	int				number_of_philo;
 	size_t			time_to_die;
@@ -50,20 +50,22 @@ typedef	struct s_data
 	int				dead;
 	int				full;
 	long			init_time;
-	
 }	t_data;
 
 //init functions
-int					ft_init_argvs(int ac,char **argv, t_data *data);
+int					ft_init_argvs(int ac, char **argv, t_data *data);
 void				init_philo(t_philo *philo, t_data *data, int id);
 void				init_forks(t_data *data);
 void				init_mutexes(t_data *data);
 
 //utils
 long int			ft_atoi(const char *str);
+int					ft_isdigit(int c);
 int					ft_usleep(size_t time, t_philo *philo);
-void				print_action(t_data *data, int id, char *action);
 size_t				ft_get_time(t_data *data);
+
+//utils_philo
+void				print_action(t_data *data, int id, char *action);
 int					ft_time_without_eat(t_philo *philo);
 
 //actions
@@ -77,10 +79,11 @@ int					is_philo_dead(t_philo *philo);
 int					is_anyone_dead(t_data *data);
 int					is_philo_satisfied(t_philo *philo);
 int					is_everyone_satisfied(t_data *data);
+void				handle_one_philo(t_philo *philo);
 
 //quit
 void				destroy_mutex(t_data *data);
 void				ft_unlock_forks(t_philo *philo);
 void				ft_quit(t_data *data);
 
-# endif
+#endif

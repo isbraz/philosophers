@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:22:03 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/12/17 16:07:41 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2024/02/05 15:20:41 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,21 @@ long int	ft_atoi(const char *str)
 	return (result * negative);
 }
 
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
+}
+
 size_t	ft_get_time(t_data *data)
 {
-	size_t		now;
+	size_t			now;
 	struct timeval	time;
 
 	gettimeofday(&time, NULL);
 	now = (time.tv_sec * 1000 + time.tv_usec / 1000);
 	return (now - (data->init_time));
-}
-
-void	print_action(t_data *data, int id, char *action)
-{
-	pthread_mutex_lock(&data->write_lock);
-	if (!data->dead)
-		printf("%ld %d %s\n", ft_get_time(data), id, action);
-	pthread_mutex_unlock(&data->write_lock);
 }
 
 int	ft_usleep(size_t time, t_philo *philo)
@@ -63,15 +62,14 @@ int	ft_usleep(size_t time, t_philo *philo)
 	start = ft_get_time(philo->data);
 	while ((ft_get_time(philo->data) - start) < time)
 	{
+		pthread_mutex_lock(&philo->data->dead_lock);
 		if (philo->data->dead == 1)
+		{
+			pthread_mutex_unlock(&philo->data->dead_lock);
 			return (1);
+		}
+		pthread_mutex_unlock(&philo->data->dead_lock);
 		usleep(200);
 	}
 	return (0);
 }
-
-int	ft_time_without_eat(t_philo *philo)
-{
-	return (ft_get_time(philo->data) - philo->last_meal);
-}
-
