@@ -6,7 +6,7 @@
 /*   By: isbraz-d <isbraz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 23:21:52 by isbraz-d          #+#    #+#             */
-/*   Updated: 2023/12/28 23:22:52 by isbraz-d         ###   ########.fr       */
+/*   Updated: 2024/02/06 14:45:46 by isbraz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ void	print_action(t_data *data, int id, char *action)
 {
 	pthread_mutex_lock(&data->write_lock);
 	pthread_mutex_lock(&data->dead_lock);
-	if (!data->dead)
+	pthread_mutex_lock(&data->philo->meal_lock);
+	if (!data->dead && data->full == 0)
 		printf("%ld %d %s\n", ft_get_time(data), id, action);
+	pthread_mutex_unlock(&data->philo->meal_lock);
 	pthread_mutex_unlock(&data->dead_lock);
 	pthread_mutex_unlock(&data->write_lock);
 }
